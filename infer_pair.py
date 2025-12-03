@@ -285,9 +285,9 @@ def hybrid_infer_pair(pair: dict, checkpoint_path: str, xt_path_for_stats: str =
 
     device_t = torch.device(device)
     in_dim = len(use_features)
-    hid = cfg.get('encoder_hidden', 64)
-    out_dim = cfg.get('encoder_out', 32)
-    proj_dim = cfg.get('proj_dim', 64)
+    hid = cfg.get('encoder_hidden', 128)
+    out_dim = cfg.get('encoder_out', 64)
+    proj_dim = cfg.get('proj_dim', 128)
 
     model = SiameseGNN(in_dim, hid, out_dim, proj_dim)
     model.load_state_dict(ckpt['model_state'] if 'model_state' in ckpt else ckpt)

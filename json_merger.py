@@ -94,8 +94,8 @@ def merge_embeddings_to_xt(xt_path, embedding_folder, out_path):
 
 
 if __name__ == "__main__":
-    xt_path = "matched_xt_ids.json"  # Ground truth mappings file
-    embedding_folder = "C:\\Users\\Z0054udc\\Downloads\\jsons2"  # Folder with embedding JSONs
-    out_path = "XT_merged_new1.json"  # Output file
+    xt_path = "XT_Synthetic_face_mappings.json"  # Ground truth mappings file
+    embedding_folder = "C:\\Users\\Z0054udc\\Downloads\\jsons_synthetic"  # Folder with embedding JSONs
+    out_path = "XT_merged_Synthetic.json"  # Output file
 
     merge_embeddings_to_xt(xt_path, embedding_folder, out_path)
