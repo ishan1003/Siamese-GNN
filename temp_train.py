@@ -19,9 +19,9 @@ from torch_geometric.nn import SAGEConv
 # ====== CONFIG ===========
 # -------------------------
 CONFIG = {
-    "xt_path": r"C:\Users\Z0054udc\Downloads\Siamese GNN\XT_merged_Synthetic.json",
+    "xt_path": r"C:\Users\Z0054udc\Downloads\Siamese GNN\XT_merged_complete.json",
 
-    "use_features": [0,1,2,3,15],  # 16 features available, using selected 5
+    "use_features": [0,1,2,3,4,17,18,19],  # indices of features to use
 
     "proj_dim": 64,
     "encoder_hidden": 64,
@@ -30,12 +30,14 @@ CONFIG = {
     "lr": 1e-3,
     "weight_decay": 1e-4,
 
-    "epochs": 1500,
+    "epochs": 800,
     "grad_accum_steps": 8,
 
     "temperature": 0.1,
     "null_margin": 0.2,
     "null_weight": 1.0,
+    "struct_weight": 20,   # or 1.0 to make it stronger
+
 
     "device": "cpu",
     "seed": 42,
@@ -197,6 +199,32 @@ def info_nce(z1, z2, matches_pos, tau=0.1):
     return F.cross_entropy(sims[anchors], targets)
 
 # ---------------------------------------------------
+#   Structural Consistency Loss
+# ---------------------------------------------------
+
+def structural_consistency_loss(hA, hB, edgeA, edgeB, pred_map):
+    edgeA_list = edgeA.t().tolist()
+    edgeB_set = set(map(tuple, edgeB.t().tolist()))
+
+    pairs = []
+    for ai, aj in edgeA_list:
+        bi = pred_map.get(int(ai), -1)
+        bj = pred_map.get(int(aj), -1)
+        if bi != -1 and bj != -1 and (bi, bj) in edgeB_set:
+            pairs.append((aj, bj))
+
+    if not pairs:
+        return hA.sum() * 0.0   # zero but keeps graph connected
+
+    idxA = torch.tensor([p[0] for p in pairs], dtype=torch.long, device=hA.device)
+    idxB = torch.tensor([p[1] for p in pairs], dtype=torch.long, device=hB.device)
+
+    # Stronger + normalized loss
+    return (1 - F.cosine_similarity(hA[idxA], hB[idxB]).mean())
+
+
+
+# ---------------------------------------------------
 #                  PREDICT FUNCTION
 # ---------------------------------------------------
 def predict(z1, z2, thr):
@@ -261,7 +289,6 @@ def compute_top1_top5(z1, z2, matches):
 #                TRAIN LOOP
 # ---------------------------------------------------
 def train():
-
     device = torch.device(CONFIG["device"])
     ds = SingleFileEmbeddingPairDataset(CONFIG["xt_path"], CONFIG["use_features"])
 
@@ -274,17 +301,20 @@ def train():
         proj_dim=CONFIG["proj_dim"]
     ).to(device)
 
-    opt = torch.optim.AdamW(model.parameters(), lr=CONFIG["lr"], weight_decay=CONFIG["weight_decay"])
+    opt = torch.optim.AdamW(
+        model.parameters(),
+        lr=CONFIG["lr"],
+        weight_decay=CONFIG["weight_decay"]
+    )
     bce = nn.BCEWithLogitsLoss()
 
     loss_hist=[]; top1_hist=[]; top5_hist=[]; null_hist=[]
-
     best=-1
     grad_acc=CONFIG["grad_accum_steps"]
 
     for ep in range(CONFIG["epochs"]):
         model.train()
-        total_loss=0
+        total_loss = 0
         all_pos=[]; all_null=[]
 
         opt.zero_grad()
@@ -294,85 +324,94 @@ def train():
             A,B,m = ds[i]
             A=A.to(device); B=B.to(device); m=m.to(device)
 
-            hA,hB,zA,zB, nullA_logits, nullB_logits = model(A,B)
+            hA,hB,zA,zB,logA,logB = model(A,B)
 
+            # ------- InfoNCE -------
             pos = m[(m[:,0]!=-1)&(m[:,1]!=-1)]
+            l1 = info_nce(zA, zB, pos, CONFIG["temperature"])
+            l2 = info_nce(zB, zA, pos[:, [1,0]], CONFIG["temperature"]) if pos.numel()>0 else 0
+            info_loss = 0.5*(l1+l2)
 
-            # InfoNCE
-            l1 = info_nce(zA,zB,pos, CONFIG["temperature"])
-            l2 = info_nce(zB,zA,pos[:,[1,0]], CONFIG["temperature"]) if pos.numel()>0 else 0
-            info = 0.5*(l1+l2)
-
-            # NULL labels
-            labels_A = torch.zeros(hA.shape[0], device=device)
-            labels_B = torch.zeros(hB.shape[0], device=device)
-
+            # ------- NULL CLS -------
+            labels_A = torch.zeros(hA.size(0), device=device)
+            labels_B = torch.zeros(hB.size(0), device=device)
             for a,b in m.tolist():
-                if a!=-1 and b==-1:
-                    labels_A[a] = 1
-                if a==-1 and b!=-1:
-                    labels_B[b] = 1
+                if a!=-1 and b==-1: labels_A[a]=1
+                if a==-1 and b!=-1: labels_B[b]=1
+            null_loss = bce(logA, labels_A) + bce(logB, labels_B)
 
-            null_cls_loss = (
-                bce(nullA_logits, labels_A) +
-                bce(nullB_logits, labels_B)
-            ) * CONFIG["null_weight"]
+            # ------- Structural Loss Using PREDICTED MATCHES -------
+            preds,_ = predict(zA, zB, thr=0.0)
+            pred_map = {a: int(preds[a]) for a,_ in m.tolist() if a!=-1}
 
-            loss = (info + null_cls_loss)/grad_acc
-            loss.backward()
+            edgeA = A.edge_index.t().tolist()
+            edgeB_set = set(tuple(x) for x in B.edge_index.t().tolist())
+            struct_pairs = []
 
-            total_loss += loss.item()*grad_acc
+            for ai,aj in edgeA:
+                bi = pred_map.get(ai,-1)
+                bj = pred_map.get(aj,-1)
+                if bi!=-1 and bj!=-1 and (bi,bj) in edgeB_set:
+                    struct_pairs.append((aj,bj))
 
+            if struct_pairs:
+                idxA = torch.tensor([p[0] for p in struct_pairs], device=device)
+                idxB = torch.tensor([p[1] for p in struct_pairs], device=device)
+                struct_loss = 1 - F.cosine_similarity(hA[idxA], hB[idxB]).mean()
+            else:
+                struct_loss = torch.tensor(0., device=device)
+
+            if i==0:
+                print(f"  StructPairs: {len(struct_pairs)}, StructLoss: {struct_loss.item():.6f}")
+
+            total = (info_loss +
+                     CONFIG["null_weight"] * null_loss +
+                     CONFIG["struct_weight"] * struct_loss) / grad_acc
+
+            total.backward()
+            total_loss += total.item()*grad_acc
+
+            # Collect similarity stats
             t1,t5,ps,ns = compute_top1_top5(zA,zB,m)
-            all_pos += ps
-            all_null += ns
+            all_pos+=ps; all_null+=ns
 
             if (i+1)%grad_acc==0:
-                torch.nn.utils.clip_grad_norm_(model.parameters(),2.0)
+                torch.nn.utils.clip_grad_norm_(model.parameters(), 2.0)
                 opt.step()
                 opt.zero_grad()
 
-        # threshold estimation
-        mp = np.mean(all_pos) if len(all_pos)>0 else 0.5
-        mn = np.mean(all_null) if len(all_null)>0 else -0.5
-        thr = float(np.clip((mp+mn)/2, -0.9,0.9))
+        # ------- Threshold and Validation -------
+        mp = np.mean(all_pos) if all_pos else 0.5
+        mn = np.mean(all_null) if all_null else -0.5
+        thr = float(np.clip((mp+mn)/2, -0.9, 0.9))
 
-        # evaluate
         model.eval()
-        E1=[]; E5=[]; EN=[]
-
+        E1, E5, EN=[], [], []
         with torch.no_grad():
             for i in range(len(ds)):
                 A,B,m = ds[i]
                 A=A.to(device); B=B.to(device); m=m.to(device)
                 _,_,zA,zB,_,_ = model(A,B)
-
                 t1,t5,ps,ns = compute_top1_top5(zA,zB,m)
-
                 if t1 is not None:
                     E1.append(100*t1)
                     E5.append(100*t5)
-
-                # NULL metrics
                 preds,_ = predict(zA,zB,thr)
                 TP=FP=FN=0
                 for a,b in m.tolist():
-                    pr = int(preds[int(a)]) if a!=-1 else 0
+                    if a==-1: continue
+                    pr = preds[a].item()
                     if b==-1:
                         if pr==-1: TP+=1
                         else: FN+=1
                     else:
                         if pr==-1: FP+=1
-
-                prec=TP/(TP+FP+1e-12)
-                rec =TP/(TP+FN+1e-12)
-                F1 =2*prec*rec/(prec+rec+1e-12)
-
+                prec = TP/(TP+FP+1e-12)
+                rec = TP/(TP+FN+1e-12)
+                F1 = 2*prec*rec/(prec+rec+1e-12)
                 EN.append(100*F1)
 
-        avg1=np.mean(E1)
-        avg5=np.mean(E5)
-        avgN=np.mean(EN)
+        avg1,avg5,avgN = np.mean(E1), np.mean(E5), np.mean(EN)
         ep_loss = total_loss/len(ds)
 
         loss_hist.append(ep_loss)
@@ -380,19 +419,20 @@ def train():
         top5_hist.append(avg5)
         null_hist.append(avgN)
 
-        print(f"Epoch {ep+1:03d}  Loss={ep_loss:.4f}  Top1={avg1:.2f}%  Top5={avg5:.2f}%  NullF1={avgN:.2f}%")
+        print(f"Epoch {ep+1:03d} Loss={ep_loss:.4f} Top1={avg1:.2f}% Top5={avg5:.2f}% NullF1={avgN:.2f}%")
 
-        if avg1>best:
-            best=avg1
+        if avg1 > best:
+            best = avg1
             torch.save({
-                "model_state":model.state_dict(),
-                "optimizer_state":opt.state_dict(),
-                "config":CONFIG,
-                "feat_mean": ds.feat_mean.cpu().numpy().tolist(),
-                "feat_std":  ds.feat_std.cpu().numpy().tolist(),
+                "model_state": model.state_dict(),
+                "optimizer_state": opt.state_dict(),
+                "config": CONFIG,
+                "feat_mean": ds.feat_mean.cpu().tolist(),
+                "feat_std": ds.feat_std.cpu().tolist(),
             }, CONFIG["save_path"])
 
-    print("Training completed. Best Top1:", best)
+    print("\nTraining Completed — Best Top1:", best)
+
 
     # plots
     plt.figure(figsize=(12,5))

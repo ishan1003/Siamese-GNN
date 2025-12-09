@@ -2,10 +2,10 @@ import json
 import os
 
 # Input file (change if needed)
-INPUT_JSON = "XT_Synthetic.json"
+INPUT_JSON = "XT_complete.json"
 
 # Output file
-OUTPUT_JSON = "XT_Synthetic_face_mappings.json"
+OUTPUT_JSON = "XT_complete_face_mappings.json"
 
 with open(INPUT_JSON, "r") as f:
     data = json.load(f)

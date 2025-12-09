@@ -1,0 +1,130 @@
+{
+  "model_id": "58",
+  "hungarian_used": true,
+  "metric_details": {
+    "top1_accuracy": 0.3333333432674408,
+    "top5_accuracy": 1.0,
+    "null_f1": 0.9999999999992499,
+    "unified_accuracy": 0.6,
+    "null_threshold": 0.7355133792480747,
+    "TP": 4,
+    "FP": 0,
+    "FN": 0,
+    "total_faces": 10,
+    "structural_edge_consistency": 1.0
+  },
+  "A_ids": [
+    496,
+    497,
+    498,
+    499,
+    500,
+    501,
+    523,
+    525,
+    737,
+    738
+  ],
+  "B_ids": [
+    496,
+    497,
+    498,
+    499,
+    500,
+    501
+  ],
+  "max_similarity_per_A": [
+    0.9151678085327148,
+    0.9001946449279785,
+    0.907527506351471,
+    0.9155037999153137,
+    0.9645825624465942,
+    0.9655144810676575,
+    0.14335224032402039,
+    0.0046834442764520645,
+    0.15360599756240845,
+    0.289852499961853
+  ],
+  "predicted_matches": [
+    {
+      "A_index": 0,
+      "A_xt_id": 496,
+      "pred_B_index": 2,
+      "pred_B_xt_id": 498,
+      "similarity": 0.9151678085327148,
+      "is_null": false
+    },
+    {
+      "A_index": 1,
+      "A_xt_id": 497,
+      "pred_B_index": 3,
+      "pred_B_xt_id": 499,
+      "similarity": 0.9001946449279785,
+      "is_null": false
+    },
+    {
+      "A_index": 2,
+      "A_xt_id": 498,
+      "pred_B_index": 0,
+      "pred_B_xt_id": 496,
+      "similarity": 0.907527506351471,
+      "is_null": false
+    },
+    {
+      "A_index": 3,
+      "A_xt_id": 499,
+      "pred_B_index": 1,
+      "pred_B_xt_id": 497,
+      "similarity": 0.9155037999153137,
+      "is_null": false
+    },
+    {
+      "A_index": 4,
+      "A_xt_id": 500,
+      "pred_B_index": 4,
+      "pred_B_xt_id": 500,
+      "similarity": 0.9645825624465942,
+      "is_null": false
+    },
+    {
+      "A_index": 5,
+      "A_xt_id": 501,
+      "pred_B_index": 5,
+      "pred_B_xt_id": 501,
+      "similarity": 0.9655144810676575,
+      "is_null": false
+    },
+    {
+      "A_index": 6,
+      "A_xt_id": 523,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.14335224032402039,
+      "is_null": true
+    },
+    {
+      "A_index": 7,
+      "A_xt_id": 525,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.0046834442764520645,
+      "is_null": true
+    },
+    {
+      "A_index": 8,
+      "A_xt_id": 737,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.15360599756240845,
+      "is_null": true
+    },
+    {
+      "A_index": 9,
+      "A_xt_id": 738,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.289852499961853,
+      "is_null": true
+    }
+  ]
+}

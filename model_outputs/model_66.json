@@ -1,0 +1,357 @@
+{
+  "model_id": "66",
+  "hungarian": true,
+  "top1": 0.8947368264198303,
+  "top5": 1.0,
+  "null_f1": 0.0,
+  "unified_accuracy": 0.8947368421052632,
+  "null_threshold": 0.7787906203926225,
+  "A_ids": [
+    "877",
+    "878",
+    "879",
+    "880",
+    "881",
+    "882",
+    "883",
+    "884",
+    "885",
+    "886",
+    "887",
+    "888",
+    "889",
+    "890",
+    "891",
+    "892",
+    "893",
+    "894",
+    "895",
+    "896",
+    "897",
+    "1064",
+    "1066",
+    "1067",
+    "1068",
+    "1142",
+    "1192",
+    "1193",
+    "1194",
+    "1195",
+    "1214",
+    "1216",
+    "1217",
+    "1218",
+    "1238",
+    "1251",
+    "1252",
+    "1253"
+  ],
+  "B_ids": [
+    "877",
+    "878",
+    "879",
+    "880",
+    "881",
+    "882",
+    "883",
+    "884",
+    "885",
+    "886",
+    "887",
+    "888",
+    "889",
+    "890",
+    "891",
+    "892",
+    "893",
+    "894",
+    "895",
+    "896",
+    "897",
+    "1064",
+    "1066",
+    "1067",
+    "1068",
+    "1142",
+    "1192",
+    "1193",
+    "1194",
+    "1195",
+    "1214",
+    "1216",
+    "1217",
+    "1218",
+    "1238",
+    "1251",
+    "1252",
+    "1253"
+  ],
+  "predicted_matches": [
+    {
+      "A_index": 0,
+      "A_xt_id": "877",
+      "pred_B_index": 0,
+      "pred_B_xt_id": "877",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "A_index": 1,
+      "A_xt_id": "878",
+      "pred_B_index": 1,
+      "pred_B_xt_id": "878",
+      "similarity": 1.0
+    },
+    {
+      "A_index": 2,
+      "A_xt_id": "879",
+      "pred_B_index": 2,
+      "pred_B_xt_id": "879",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "A_index": 3,
+      "A_xt_id": "880",
+      "pred_B_index": 3,
+      "pred_B_xt_id": "880",
+      "similarity": 1.0
+    },
+    {
+      "A_index": 4,
+      "A_xt_id": "881",
+      "pred_B_index": 4,
+      "pred_B_xt_id": "881",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "A_index": 5,
+      "A_xt_id": "882",
+      "pred_B_index": 5,
+      "pred_B_xt_id": "882",
+      "similarity": 0.9999998211860657
+    },
+    {
+      "A_index": 6,
+      "A_xt_id": "883",
+      "pred_B_index": 6,
+      "pred_B_xt_id": "883",
+      "similarity": 1.0
+    },
+    {
+      "A_index": 7,
+      "A_xt_id": "884",
+      "pred_B_index": 7,
+      "pred_B_xt_id": "884",
+      "similarity": 1.0
+    },
+    {
+      "A_index": 8,
+      "A_xt_id": "885",
+      "pred_B_index": 8,
+      "pred_B_xt_id": "885",
+      "similarity": 0.9999999403953552
+    },
+    {
+      "A_index": 9,
+      "A_xt_id": "886",
+      "pred_B_index": 9,
+      "pred_B_xt_id": "886",
+      "similarity": 1.000000238418579
+    },
+    {
+      "A_index": 10,
+      "A_xt_id": "887",
+      "pred_B_index": 10,
+      "pred_B_xt_id": "887",
+      "similarity": 0.9999998211860657
+    },
+    {
+      "A_index": 11,
+      "A_xt_id": "888",
+      "pred_B_index": 11,
+      "pred_B_xt_id": "888",
+      "similarity": 0.9999999403953552
+    },
+    {
+      "A_index": 12,
+      "A_xt_id": "889",
+      "pred_B_index": 12,
+      "pred_B_xt_id": "889",
+      "similarity": 0.9999998807907104
+    },
+    {
+      "A_index": 13,
+      "A_xt_id": "890",
+      "pred_B_index": 13,
+      "pred_B_xt_id": "890",
+      "similarity": 1.0
+    },
+    {
+      "A_index": 14,
+      "A_xt_id": "891",
+      "pred_B_index": 14,
+      "pred_B_xt_id": "891",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "A_index": 15,
+      "A_xt_id": "892",
+      "pred_B_index": 15,
+      "pred_B_xt_id": "892",
+      "similarity": 1.000000238418579
+    },
+    {
+      "A_index": 16,
+      "A_xt_id": "893",
+      "pred_B_index": 16,
+      "pred_B_xt_id": "893",
+      "similarity": 1.0
+    },
+    {
+      "A_index": 17,
+      "A_xt_id": "894",
+      "pred_B_index": 17,
+      "pred_B_xt_id": "894",
+      "similarity": 1.0
+    },
+    {
+      "A_index": 18,
+      "A_xt_id": "895",
+      "pred_B_index": 18,
+      "pred_B_xt_id": "895",
+      "similarity": 1.0
+    },
+    {
+      "A_index": 19,
+      "A_xt_id": "896",
+      "pred_B_index": 19,
+      "pred_B_xt_id": "896",
+      "similarity": 1.0
+    },
+    {
+      "A_index": 20,
+      "A_xt_id": "897",
+      "pred_B_index": 20,
+      "pred_B_xt_id": "897",
+      "similarity": 0.9999999403953552
+    },
+    {
+      "A_index": 21,
+      "A_xt_id": "1064",
+      "pred_B_index": 21,
+      "pred_B_xt_id": "1064",
+      "similarity": 0.9999998807907104
+    },
+    {
+      "A_index": 22,
+      "A_xt_id": "1066",
+      "pred_B_index": 22,
+      "pred_B_xt_id": "1066",
+      "similarity": 1.0
+    },
+    {
+      "A_index": 23,
+      "A_xt_id": "1067",
+      "pred_B_index": 23,
+      "pred_B_xt_id": "1067",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "A_index": 24,
+      "A_xt_id": "1068",
+      "pred_B_index": 24,
+      "pred_B_xt_id": "1068",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "A_index": 25,
+      "A_xt_id": "1142",
+      "pred_B_index": 30,
+      "pred_B_xt_id": "1214",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "A_index": 26,
+      "A_xt_id": "1192",
+      "pred_B_index": 26,
+      "pred_B_xt_id": "1192",
+      "similarity": 1.000000238418579
+    },
+    {
+      "A_index": 27,
+      "A_xt_id": "1193",
+      "pred_B_index": 27,
+      "pred_B_xt_id": "1193",
+      "similarity": 1.000000238418579
+    },
+    {
+      "A_index": 28,
+      "A_xt_id": "1194",
+      "pred_B_index": 28,
+      "pred_B_xt_id": "1194",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "A_index": 29,
+      "A_xt_id": "1195",
+      "pred_B_index": 29,
+      "pred_B_xt_id": "1195",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "A_index": 30,
+      "A_xt_id": "1214",
+      "pred_B_index": 25,
+      "pred_B_xt_id": "1142",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "A_index": 31,
+      "A_xt_id": "1216",
+      "pred_B_index": 32,
+      "pred_B_xt_id": "1217",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "A_index": 32,
+      "A_xt_id": "1217",
+      "pred_B_index": 31,
+      "pred_B_xt_id": "1216",
+      "similarity": 1.000000238418579
+    },
+    {
+      "A_index": 33,
+      "A_xt_id": "1218",
+      "pred_B_index": 33,
+      "pred_B_xt_id": "1218",
+      "similarity": 0.9999997615814209
+    },
+    {
+      "A_index": 34,
+      "A_xt_id": "1238",
+      "pred_B_index": 34,
+      "pred_B_xt_id": "1238",
+      "similarity": 1.0
+    },
+    {
+      "A_index": 35,
+      "A_xt_id": "1251",
+      "pred_B_index": 35,
+      "pred_B_xt_id": "1251",
+      "similarity": 1.0000001192092896
+    },
+    {
+      "A_index": 36,
+      "A_xt_id": "1252",
+      "pred_B_index": 36,
+      "pred_B_xt_id": "1252",
+      "similarity": 1.0
+    },
+    {
+      "A_index": 37,
+      "A_xt_id": "1253",
+      "pred_B_index": 37,
+      "pred_B_xt_id": "1253",
+      "similarity": 0.9999998807907104
+    }
+  ]
+}

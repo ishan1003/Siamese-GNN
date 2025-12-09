@@ -1,0 +1,1202 @@
+{
+  "model_id": "102",
+  "hungarian_used": true,
+  "metric_details": {
+    "top1_accuracy": 0.9791666865348816,
+    "top5_accuracy": 1.0,
+    "null_f1": 0.9923664122132253,
+    "unified_accuracy": 0.9911504424778761,
+    "null_threshold": 0.7355133792480747,
+    "TP": 65,
+    "FP": 1,
+    "FN": 0,
+    "total_faces": 113,
+    "structural_edge_consistency": 1.0
+  },
+  "A_ids": [
+    1115,
+    1116,
+    1117,
+    1118,
+    1119,
+    1120,
+    1121,
+    1122,
+    1123,
+    1124,
+    1125,
+    1126,
+    1127,
+    1128,
+    1129,
+    1130,
+    1131,
+    1132,
+    1133,
+    1134,
+    1135,
+    1136,
+    1199,
+    1200,
+    1202,
+    1217,
+    1233,
+    1234,
+    1235,
+    1250,
+    1268,
+    1273,
+    1274,
+    1275,
+    1290,
+    1291,
+    1292,
+    1293,
+    1308,
+    1309,
+    1310,
+    1311,
+    1312,
+    1313,
+    1336,
+    1337,
+    1338,
+    1339,
+    1340,
+    1341,
+    1342,
+    1343,
+    1344,
+    1345,
+    1346,
+    1347,
+    1348,
+    1349,
+    1350,
+    1351,
+    1352,
+    1353,
+    1354,
+    1355,
+    1356,
+    1357,
+    1420,
+    1421,
+    1422,
+    1423,
+    1424,
+    1425,
+    1427,
+    1428,
+    1429,
+    1430,
+    1431,
+    1432,
+    1433,
+    1434,
+    1435,
+    1436,
+    1437,
+    1438,
+    1439,
+    1440,
+    1441,
+    1504,
+    1505,
+    1506,
+    1507,
+    1508,
+    1509,
+    1510,
+    1511,
+    1512,
+    1513,
+    1514,
+    1515,
+    1516,
+    1517,
+    1518,
+    1519,
+    1520,
+    1521,
+    1522,
+    1523,
+    1524,
+    1525,
+    1773,
+    1778,
+    1783,
+    1788
+  ],
+  "B_ids": [
+    1115,
+    1116,
+    1117,
+    1118,
+    1119,
+    1120,
+    1121,
+    1122,
+    1123,
+    1124,
+    1125,
+    1126,
+    1127,
+    1128,
+    1129,
+    1130,
+    1131,
+    1132,
+    1133,
+    1134,
+    1135,
+    1136,
+    1199,
+    1200,
+    1202,
+    1217,
+    1233,
+    1234,
+    1235,
+    1250,
+    1268,
+    1273,
+    1274,
+    1275,
+    1290,
+    1291,
+    1292,
+    1293,
+    1308,
+    1309,
+    1310,
+    1311,
+    1312,
+    1313,
+    1773,
+    1778,
+    1783,
+    1788
+  ],
+  "max_similarity_per_A": [
+    0.550236165523529,
+    0.9640024304389954,
+    0.9919695854187012,
+    0.9998138546943665,
+    0.9994469881057739,
+    0.9999518394470215,
+    0.9987537860870361,
+    0.9998774528503418,
+    0.9990122318267822,
+    0.9887596368789673,
+    0.9953621029853821,
+    0.9992937445640564,
+    0.997084379196167,
+    0.9990432262420654,
+    0.9996381998062134,
+    0.999922513961792,
+    0.9995352625846863,
+    0.9985557794570923,
+    0.9704921841621399,
+    0.9087777733802795,
+    0.9941240549087524,
+    0.996312141418457,
+    0.9987248778343201,
+    0.9977198243141174,
+    0.9978622198104858,
+    0.9995201826095581,
+    0.9961764812469482,
+    0.9253422617912292,
+    0.9958696365356445,
+    0.9946750998497009,
+    0.9980471134185791,
+    0.9919814467430115,
+    0.9948233366012573,
+    0.963681161403656,
+    0.9999826550483704,
+    0.9989075660705566,
+    0.9988360404968262,
+    0.9986157417297363,
+    0.9990177750587463,
+    0.9905424118041992,
+    0.9961057901382446,
+    0.9987335205078125,
+    0.9978613257408142,
+    0.9957481026649475,
+    0.2987808883190155,
+    0.4874260425567627,
+    0.2826741337776184,
+    0.5454927086830139,
+    0.3083292841911316,
+    0.4979778528213501,
+    0.3105347454547882,
+    0.46448057889938354,
+    0.2825974225997925,
+    0.4979773759841919,
+    0.29585540294647217,
+    0.4964146316051483,
+    0.2656111717224121,
+    0.43752408027648926,
+    0.36229175329208374,
+    0.469586044549942,
+    0.3646577298641205,
+    0.571044385433197,
+    0.2656228542327881,
+    0.4860694110393524,
+    0.579548716545105,
+    0.4196833372116089,
+    0.3856516182422638,
+    0.39691072702407837,
+    0.387728750705719,
+    0.29444169998168945,
+    0.5493562817573547,
+    0.3940075635910034,
+    0.3870941400527954,
+    0.5007264018058777,
+    0.23301614820957184,
+    0.37801191210746765,
+    0.4052920341491699,
+    0.37727218866348267,
+    0.25638777017593384,
+    0.5048562288284302,
+    0.3247387409210205,
+    0.5050967335700989,
+    0.3785291314125061,
+    0.5110270380973816,
+    0.33217623829841614,
+    0.40528249740600586,
+    0.3621716797351837,
+    0.25837627053260803,
+    0.4893435835838318,
+    0.4630776643753052,
+    0.3563237488269806,
+    0.44045037031173706,
+    0.5049794316291809,
+    0.2888956665992737,
+    0.3860218822956085,
+    0.6258771419525146,
+    0.3862902522087097,
+    0.30788302421569824,
+    0.4942389726638794,
+    0.38663697242736816,
+    0.5724310278892517,
+    0.3541719615459442,
+    0.4518936276435852,
+    0.27741873264312744,
+    0.3873786926269531,
+    0.6336008906364441,
+    0.39096036553382874,
+    0.24686181545257568,
+    0.5478237271308899,
+    0.9995499849319458,
+    0.999761700630188,
+    0.999097466468811,
+    0.9998314380645752
+  ],
+  "predicted_matches": [
+    {
+      "A_index": 0,
+      "A_xt_id": 1115,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.550236165523529,
+      "is_null": true
+    },
+    {
+      "A_index": 1,
+      "A_xt_id": 1116,
+      "pred_B_index": 1,
+      "pred_B_xt_id": 1116,
+      "similarity": 0.9640024304389954,
+      "is_null": false
+    },
+    {
+      "A_index": 2,
+      "A_xt_id": 1117,
+      "pred_B_index": 2,
+      "pred_B_xt_id": 1117,
+      "similarity": 0.9919695854187012,
+      "is_null": false
+    },
+    {
+      "A_index": 3,
+      "A_xt_id": 1118,
+      "pred_B_index": 3,
+      "pred_B_xt_id": 1118,
+      "similarity": 0.9998138546943665,
+      "is_null": false
+    },
+    {
+      "A_index": 4,
+      "A_xt_id": 1119,
+      "pred_B_index": 4,
+      "pred_B_xt_id": 1119,
+      "similarity": 0.9994469881057739,
+      "is_null": false
+    },
+    {
+      "A_index": 5,
+      "A_xt_id": 1120,
+      "pred_B_index": 5,
+      "pred_B_xt_id": 1120,
+      "similarity": 0.9999518394470215,
+      "is_null": false
+    },
+    {
+      "A_index": 6,
+      "A_xt_id": 1121,
+      "pred_B_index": 6,
+      "pred_B_xt_id": 1121,
+      "similarity": 0.9987537860870361,
+      "is_null": false
+    },
+    {
+      "A_index": 7,
+      "A_xt_id": 1122,
+      "pred_B_index": 7,
+      "pred_B_xt_id": 1122,
+      "similarity": 0.9998774528503418,
+      "is_null": false
+    },
+    {
+      "A_index": 8,
+      "A_xt_id": 1123,
+      "pred_B_index": 8,
+      "pred_B_xt_id": 1123,
+      "similarity": 0.9990122318267822,
+      "is_null": false
+    },
+    {
+      "A_index": 9,
+      "A_xt_id": 1124,
+      "pred_B_index": 9,
+      "pred_B_xt_id": 1124,
+      "similarity": 0.9887596368789673,
+      "is_null": false
+    },
+    {
+      "A_index": 10,
+      "A_xt_id": 1125,
+      "pred_B_index": 10,
+      "pred_B_xt_id": 1125,
+      "similarity": 0.9953621029853821,
+      "is_null": false
+    },
+    {
+      "A_index": 11,
+      "A_xt_id": 1126,
+      "pred_B_index": 11,
+      "pred_B_xt_id": 1126,
+      "similarity": 0.9992937445640564,
+      "is_null": false
+    },
+    {
+      "A_index": 12,
+      "A_xt_id": 1127,
+      "pred_B_index": 12,
+      "pred_B_xt_id": 1127,
+      "similarity": 0.997084379196167,
+      "is_null": false
+    },
+    {
+      "A_index": 13,
+      "A_xt_id": 1128,
+      "pred_B_index": 13,
+      "pred_B_xt_id": 1128,
+      "similarity": 0.9990432262420654,
+      "is_null": false
+    },
+    {
+      "A_index": 14,
+      "A_xt_id": 1129,
+      "pred_B_index": 14,
+      "pred_B_xt_id": 1129,
+      "similarity": 0.9996381998062134,
+      "is_null": false
+    },
+    {
+      "A_index": 15,
+      "A_xt_id": 1130,
+      "pred_B_index": 15,
+      "pred_B_xt_id": 1130,
+      "similarity": 0.999922513961792,
+      "is_null": false
+    },
+    {
+      "A_index": 16,
+      "A_xt_id": 1131,
+      "pred_B_index": 16,
+      "pred_B_xt_id": 1131,
+      "similarity": 0.9995352625846863,
+      "is_null": false
+    },
+    {
+      "A_index": 17,
+      "A_xt_id": 1132,
+      "pred_B_index": 17,
+      "pred_B_xt_id": 1132,
+      "similarity": 0.9985557794570923,
+      "is_null": false
+    },
+    {
+      "A_index": 18,
+      "A_xt_id": 1133,
+      "pred_B_index": 18,
+      "pred_B_xt_id": 1133,
+      "similarity": 0.9704921841621399,
+      "is_null": false
+    },
+    {
+      "A_index": 19,
+      "A_xt_id": 1134,
+      "pred_B_index": 19,
+      "pred_B_xt_id": 1134,
+      "similarity": 0.9087777733802795,
+      "is_null": false
+    },
+    {
+      "A_index": 20,
+      "A_xt_id": 1135,
+      "pred_B_index": 20,
+      "pred_B_xt_id": 1135,
+      "similarity": 0.9941240549087524,
+      "is_null": false
+    },
+    {
+      "A_index": 21,
+      "A_xt_id": 1136,
+      "pred_B_index": 21,
+      "pred_B_xt_id": 1136,
+      "similarity": 0.996312141418457,
+      "is_null": false
+    },
+    {
+      "A_index": 22,
+      "A_xt_id": 1199,
+      "pred_B_index": 22,
+      "pred_B_xt_id": 1199,
+      "similarity": 0.9987248778343201,
+      "is_null": false
+    },
+    {
+      "A_index": 23,
+      "A_xt_id": 1200,
+      "pred_B_index": 23,
+      "pred_B_xt_id": 1200,
+      "similarity": 0.9977198243141174,
+      "is_null": false
+    },
+    {
+      "A_index": 24,
+      "A_xt_id": 1202,
+      "pred_B_index": 24,
+      "pred_B_xt_id": 1202,
+      "similarity": 0.9978622198104858,
+      "is_null": false
+    },
+    {
+      "A_index": 25,
+      "A_xt_id": 1217,
+      "pred_B_index": 25,
+      "pred_B_xt_id": 1217,
+      "similarity": 0.9995201826095581,
+      "is_null": false
+    },
+    {
+      "A_index": 26,
+      "A_xt_id": 1233,
+      "pred_B_index": 26,
+      "pred_B_xt_id": 1233,
+      "similarity": 0.9961764812469482,
+      "is_null": false
+    },
+    {
+      "A_index": 27,
+      "A_xt_id": 1234,
+      "pred_B_index": 27,
+      "pred_B_xt_id": 1234,
+      "similarity": 0.9253422617912292,
+      "is_null": false
+    },
+    {
+      "A_index": 28,
+      "A_xt_id": 1235,
+      "pred_B_index": 28,
+      "pred_B_xt_id": 1235,
+      "similarity": 0.9958696365356445,
+      "is_null": false
+    },
+    {
+      "A_index": 29,
+      "A_xt_id": 1250,
+      "pred_B_index": 29,
+      "pred_B_xt_id": 1250,
+      "similarity": 0.9946750998497009,
+      "is_null": false
+    },
+    {
+      "A_index": 30,
+      "A_xt_id": 1268,
+      "pred_B_index": 30,
+      "pred_B_xt_id": 1268,
+      "similarity": 0.9980471134185791,
+      "is_null": false
+    },
+    {
+      "A_index": 31,
+      "A_xt_id": 1273,
+      "pred_B_index": 31,
+      "pred_B_xt_id": 1273,
+      "similarity": 0.9919814467430115,
+      "is_null": false
+    },
+    {
+      "A_index": 32,
+      "A_xt_id": 1274,
+      "pred_B_index": 32,
+      "pred_B_xt_id": 1274,
+      "similarity": 0.9948233366012573,
+      "is_null": false
+    },
+    {
+      "A_index": 33,
+      "A_xt_id": 1275,
+      "pred_B_index": 33,
+      "pred_B_xt_id": 1275,
+      "similarity": 0.963681161403656,
+      "is_null": false
+    },
+    {
+      "A_index": 34,
+      "A_xt_id": 1290,
+      "pred_B_index": 34,
+      "pred_B_xt_id": 1290,
+      "similarity": 0.9999826550483704,
+      "is_null": false
+    },
+    {
+      "A_index": 35,
+      "A_xt_id": 1291,
+      "pred_B_index": 35,
+      "pred_B_xt_id": 1291,
+      "similarity": 0.9989075660705566,
+      "is_null": false
+    },
+    {
+      "A_index": 36,
+      "A_xt_id": 1292,
+      "pred_B_index": 36,
+      "pred_B_xt_id": 1292,
+      "similarity": 0.9988360404968262,
+      "is_null": false
+    },
+    {
+      "A_index": 37,
+      "A_xt_id": 1293,
+      "pred_B_index": 37,
+      "pred_B_xt_id": 1293,
+      "similarity": 0.9986157417297363,
+      "is_null": false
+    },
+    {
+      "A_index": 38,
+      "A_xt_id": 1308,
+      "pred_B_index": 38,
+      "pred_B_xt_id": 1308,
+      "similarity": 0.9990177750587463,
+      "is_null": false
+    },
+    {
+      "A_index": 39,
+      "A_xt_id": 1309,
+      "pred_B_index": 39,
+      "pred_B_xt_id": 1309,
+      "similarity": 0.9905424118041992,
+      "is_null": false
+    },
+    {
+      "A_index": 40,
+      "A_xt_id": 1310,
+      "pred_B_index": 40,
+      "pred_B_xt_id": 1310,
+      "similarity": 0.9961057901382446,
+      "is_null": false
+    },
+    {
+      "A_index": 41,
+      "A_xt_id": 1311,
+      "pred_B_index": 41,
+      "pred_B_xt_id": 1311,
+      "similarity": 0.9987335205078125,
+      "is_null": false
+    },
+    {
+      "A_index": 42,
+      "A_xt_id": 1312,
+      "pred_B_index": 42,
+      "pred_B_xt_id": 1312,
+      "similarity": 0.9978613257408142,
+      "is_null": false
+    },
+    {
+      "A_index": 43,
+      "A_xt_id": 1313,
+      "pred_B_index": 43,
+      "pred_B_xt_id": 1313,
+      "similarity": 0.9957481026649475,
+      "is_null": false
+    },
+    {
+      "A_index": 44,
+      "A_xt_id": 1336,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.2987808883190155,
+      "is_null": true
+    },
+    {
+      "A_index": 45,
+      "A_xt_id": 1337,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.4874260425567627,
+      "is_null": true
+    },
+    {
+      "A_index": 46,
+      "A_xt_id": 1338,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.2826741337776184,
+      "is_null": true
+    },
+    {
+      "A_index": 47,
+      "A_xt_id": 1339,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.5454927086830139,
+      "is_null": true
+    },
+    {
+      "A_index": 48,
+      "A_xt_id": 1340,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.3083292841911316,
+      "is_null": true
+    },
+    {
+      "A_index": 49,
+      "A_xt_id": 1341,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.4979778528213501,
+      "is_null": true
+    },
+    {
+      "A_index": 50,
+      "A_xt_id": 1342,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.3105347454547882,
+      "is_null": true
+    },
+    {
+      "A_index": 51,
+      "A_xt_id": 1343,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.46448057889938354,
+      "is_null": true
+    },
+    {
+      "A_index": 52,
+      "A_xt_id": 1344,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.2825974225997925,
+      "is_null": true
+    },
+    {
+      "A_index": 53,
+      "A_xt_id": 1345,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.4979773759841919,
+      "is_null": true
+    },
+    {
+      "A_index": 54,
+      "A_xt_id": 1346,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.29585540294647217,
+      "is_null": true
+    },
+    {
+      "A_index": 55,
+      "A_xt_id": 1347,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.4964146316051483,
+      "is_null": true
+    },
+    {
+      "A_index": 56,
+      "A_xt_id": 1348,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.2656111717224121,
+      "is_null": true
+    },
+    {
+      "A_index": 57,
+      "A_xt_id": 1349,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.43752408027648926,
+      "is_null": true
+    },
+    {
+      "A_index": 58,
+      "A_xt_id": 1350,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.36229175329208374,
+      "is_null": true
+    },
+    {
+      "A_index": 59,
+      "A_xt_id": 1351,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.469586044549942,
+      "is_null": true
+    },
+    {
+      "A_index": 60,
+      "A_xt_id": 1352,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.3646577298641205,
+      "is_null": true
+    },
+    {
+      "A_index": 61,
+      "A_xt_id": 1353,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.571044385433197,
+      "is_null": true
+    },
+    {
+      "A_index": 62,
+      "A_xt_id": 1354,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.2656228542327881,
+      "is_null": true
+    },
+    {
+      "A_index": 63,
+      "A_xt_id": 1355,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.4860694110393524,
+      "is_null": true
+    },
+    {
+      "A_index": 64,
+      "A_xt_id": 1356,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.579548716545105,
+      "is_null": true
+    },
+    {
+      "A_index": 65,
+      "A_xt_id": 1357,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.4196833372116089,
+      "is_null": true
+    },
+    {
+      "A_index": 66,
+      "A_xt_id": 1420,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.3856516182422638,
+      "is_null": true
+    },
+    {
+      "A_index": 67,
+      "A_xt_id": 1421,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.39691072702407837,
+      "is_null": true
+    },
+    {
+      "A_index": 68,
+      "A_xt_id": 1422,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.387728750705719,
+      "is_null": true
+    },
+    {
+      "A_index": 69,
+      "A_xt_id": 1423,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.29444169998168945,
+      "is_null": true
+    },
+    {
+      "A_index": 70,
+      "A_xt_id": 1424,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.5493562817573547,
+      "is_null": true
+    },
+    {
+      "A_index": 71,
+      "A_xt_id": 1425,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.3940075635910034,
+      "is_null": true
+    },
+    {
+      "A_index": 72,
+      "A_xt_id": 1427,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.3870941400527954,
+      "is_null": true
+    },
+    {
+      "A_index": 73,
+      "A_xt_id": 1428,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.5007264018058777,
+      "is_null": true
+    },
+    {
+      "A_index": 74,
+      "A_xt_id": 1429,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.23301614820957184,
+      "is_null": true
+    },
+    {
+      "A_index": 75,
+      "A_xt_id": 1430,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.37801191210746765,
+      "is_null": true
+    },
+    {
+      "A_index": 76,
+      "A_xt_id": 1431,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.4052920341491699,
+      "is_null": true
+    },
+    {
+      "A_index": 77,
+      "A_xt_id": 1432,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.37727218866348267,
+      "is_null": true
+    },
+    {
+      "A_index": 78,
+      "A_xt_id": 1433,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.25638777017593384,
+      "is_null": true
+    },
+    {
+      "A_index": 79,
+      "A_xt_id": 1434,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.5048562288284302,
+      "is_null": true
+    },
+    {
+      "A_index": 80,
+      "A_xt_id": 1435,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.3247387409210205,
+      "is_null": true
+    },
+    {
+      "A_index": 81,
+      "A_xt_id": 1436,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.5050967335700989,
+      "is_null": true
+    },
+    {
+      "A_index": 82,
+      "A_xt_id": 1437,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.3785291314125061,
+      "is_null": true
+    },
+    {
+      "A_index": 83,
+      "A_xt_id": 1438,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.5110270380973816,
+      "is_null": true
+    },
+    {
+      "A_index": 84,
+      "A_xt_id": 1439,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.33217623829841614,
+      "is_null": true
+    },
+    {
+      "A_index": 85,
+      "A_xt_id": 1440,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.40528249740600586,
+      "is_null": true
+    },
+    {
+      "A_index": 86,
+      "A_xt_id": 1441,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.3621716797351837,
+      "is_null": true
+    },
+    {
+      "A_index": 87,
+      "A_xt_id": 1504,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.25837627053260803,
+      "is_null": true
+    },
+    {
+      "A_index": 88,
+      "A_xt_id": 1505,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.4893435835838318,
+      "is_null": true
+    },
+    {
+      "A_index": 89,
+      "A_xt_id": 1506,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.4630776643753052,
+      "is_null": true
+    },
+    {
+      "A_index": 90,
+      "A_xt_id": 1507,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.3563237488269806,
+      "is_null": true
+    },
+    {
+      "A_index": 91,
+      "A_xt_id": 1508,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.44045037031173706,
+      "is_null": true
+    },
+    {
+      "A_index": 92,
+      "A_xt_id": 1509,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.5049794316291809,
+      "is_null": true
+    },
+    {
+      "A_index": 93,
+      "A_xt_id": 1510,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.2888956665992737,
+      "is_null": true
+    },
+    {
+      "A_index": 94,
+      "A_xt_id": 1511,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.3860218822956085,
+      "is_null": true
+    },
+    {
+      "A_index": 95,
+      "A_xt_id": 1512,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.6258771419525146,
+      "is_null": true
+    },
+    {
+      "A_index": 96,
+      "A_xt_id": 1513,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.3862902522087097,
+      "is_null": true
+    },
+    {
+      "A_index": 97,
+      "A_xt_id": 1514,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.30788302421569824,
+      "is_null": true
+    },
+    {
+      "A_index": 98,
+      "A_xt_id": 1515,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.4942389726638794,
+      "is_null": true
+    },
+    {
+      "A_index": 99,
+      "A_xt_id": 1516,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.38663697242736816,
+      "is_null": true
+    },
+    {
+      "A_index": 100,
+      "A_xt_id": 1517,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.5724310278892517,
+      "is_null": true
+    },
+    {
+      "A_index": 101,
+      "A_xt_id": 1518,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.3541719615459442,
+      "is_null": true
+    },
+    {
+      "A_index": 102,
+      "A_xt_id": 1519,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.4518936276435852,
+      "is_null": true
+    },
+    {
+      "A_index": 103,
+      "A_xt_id": 1520,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.27741873264312744,
+      "is_null": true
+    },
+    {
+      "A_index": 104,
+      "A_xt_id": 1521,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.3873786926269531,
+      "is_null": true
+    },
+    {
+      "A_index": 105,
+      "A_xt_id": 1522,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.6336008906364441,
+      "is_null": true
+    },
+    {
+      "A_index": 106,
+      "A_xt_id": 1523,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.39096036553382874,
+      "is_null": true
+    },
+    {
+      "A_index": 107,
+      "A_xt_id": 1524,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.24686181545257568,
+      "is_null": true
+    },
+    {
+      "A_index": 108,
+      "A_xt_id": 1525,
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.5478237271308899,
+      "is_null": true
+    },
+    {
+      "A_index": 109,
+      "A_xt_id": 1773,
+      "pred_B_index": 44,
+      "pred_B_xt_id": 1773,
+      "similarity": 0.9995499849319458,
+      "is_null": false
+    },
+    {
+      "A_index": 110,
+      "A_xt_id": 1778,
+      "pred_B_index": 45,
+      "pred_B_xt_id": 1778,
+      "similarity": 0.999761700630188,
+      "is_null": false
+    },
+    {
+      "A_index": 111,
+      "A_xt_id": 1783,
+      "pred_B_index": 46,
+      "pred_B_xt_id": 1783,
+      "similarity": 0.999097466468811,
+      "is_null": false
+    },
+    {
+      "A_index": 112,
+      "A_xt_id": 1788,
+      "pred_B_index": 47,
+      "pred_B_xt_id": 1788,
+      "similarity": 0.9998314380645752,
+      "is_null": false
+    }
+  ]
+}
