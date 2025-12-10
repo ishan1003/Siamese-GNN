@@ -6,7 +6,7 @@
     "top5_accuracy": 1.0,
     "null_f1": 0.9090909090903305,
     "unified_accuracy": 0.9333333333333333,
-    "null_threshold": 0.7355133792480747,
+    "null_threshold": 0.741270332384585,
     "TP": 10,
     "FP": 2,
     "FN": 0,
@@ -69,36 +69,36 @@
     1399
   ],
   "max_similarity_per_A": [
-    0.6001827716827393,
-    0.5757062435150146,
-    0.6590351462364197,
-    0.73783940076828,
-    0.751072108745575,
-    0.8894798159599304,
-    0.8895630836486816,
-    0.8883963823318481,
-    0.9110962152481079,
-    0.7988499402999878,
-    0.554962694644928,
-    0.8908141851425171,
-    0.9559592008590698,
-    0.8302149772644043,
-    0.8425255417823792,
-    0.9304537773132324,
-    0.9325539469718933,
-    0.8969270586967468,
-    0.6699553728103638,
-    0.9698642492294312,
-    0.8389666080474854,
-    0.9215929508209229,
-    0.8567382097244263,
-    0.6830928325653076,
-    0.549006462097168,
-    0.792651891708374,
-    0.6151683926582336,
-    0.645331621170044,
-    0.805042028427124,
-    0.48301318287849426
+    0.6470277905464172,
+    0.5515416860580444,
+    0.558019757270813,
+    0.7144514322280884,
+    0.7330561876296997,
+    0.8506608009338379,
+    0.8673631548881531,
+    0.9120501279830933,
+    0.9125328063964844,
+    0.848168134689331,
+    0.9662430882453918,
+    0.9400227069854736,
+    0.9315836429595947,
+    0.9589964151382446,
+    0.9215800762176514,
+    0.7995393872261047,
+    0.9362618327140808,
+    0.9000975489616394,
+    0.8650426268577576,
+    0.8933825492858887,
+    0.926327645778656,
+    0.9221633672714233,
+    0.8944923281669617,
+    0.736966609954834,
+    0.6796719431877136,
+    0.5312695503234863,
+    0.7154268026351929,
+    0.48263001441955566,
+    0.6424954533576965,
+    0.5023316144943237
   ],
   "predicted_matches": [
     {
@@ -106,7 +106,7 @@
       "A_xt_id": 329,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.6001827716827393,
+      "similarity": 0.6470277905464172,
       "is_null": true
     },
     {
@@ -114,7 +114,7 @@
       "A_xt_id": 330,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.5757062435150146,
+      "similarity": 0.5515416860580444,
       "is_null": true
     },
     {
@@ -122,31 +122,31 @@
       "A_xt_id": 334,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.6590351462364197,
+      "similarity": 0.558019757270813,
       "is_null": true
     },
     {
       "A_index": 3,
       "A_xt_id": 345,
-      "pred_B_index": 0,
-      "pred_B_xt_id": 345,
-      "similarity": 0.73783940076828,
-      "is_null": false
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.7144514322280884,
+      "is_null": true
     },
     {
       "A_index": 4,
       "A_xt_id": 346,
-      "pred_B_index": 1,
-      "pred_B_xt_id": 346,
-      "similarity": 0.751072108745575,
-      "is_null": false
+      "pred_B_index": null,
+      "pred_B_xt_id": null,
+      "similarity": 0.7330561876296997,
+      "is_null": true
     },
     {
       "A_index": 5,
       "A_xt_id": 347,
       "pred_B_index": 2,
       "pred_B_xt_id": 347,
-      "similarity": 0.8894798159599304,
+      "similarity": 0.8506608009338379,
       "is_null": false
     },
     {
@@ -154,7 +154,7 @@
       "A_xt_id": 348,
       "pred_B_index": 3,
       "pred_B_xt_id": 348,
-      "similarity": 0.8895630836486816,
+      "similarity": 0.8673631548881531,
       "is_null": false
     },
     {
@@ -162,7 +162,7 @@
       "A_xt_id": 349,
       "pred_B_index": 4,
       "pred_B_xt_id": 349,
-      "similarity": 0.8883963823318481,
+      "similarity": 0.9120501279830933,
       "is_null": false
     },
     {
@@ -170,7 +170,7 @@
       "A_xt_id": 350,
       "pred_B_index": 5,
       "pred_B_xt_id": 350,
-      "similarity": 0.9110962152481079,
+      "similarity": 0.9125328063964844,
       "is_null": false
     },
     {
@@ -178,23 +178,23 @@
       "A_xt_id": 351,
       "pred_B_index": 6,
       "pred_B_xt_id": 351,
-      "similarity": 0.7988499402999878,
+      "similarity": 0.848168134689331,
       "is_null": false
     },
     {
       "A_index": 10,
       "A_xt_id": 352,
-      "pred_B_index": null,
-      "pred_B_xt_id": null,
-      "similarity": 0.554962694644928,
-      "is_null": true
+      "pred_B_index": 7,
+      "pred_B_xt_id": 352,
+      "similarity": 0.9662430882453918,
+      "is_null": false
     },
     {
       "A_index": 11,
       "A_xt_id": 388,
       "pred_B_index": 8,
       "pred_B_xt_id": 388,
-      "similarity": 0.8908141851425171,
+      "similarity": 0.9400227069854736,
       "is_null": false
     },
     {
@@ -202,7 +202,7 @@
       "A_xt_id": 389,
       "pred_B_index": 9,
       "pred_B_xt_id": 389,
-      "similarity": 0.9559592008590698,
+      "similarity": 0.9315836429595947,
       "is_null": false
     },
     {
@@ -210,7 +210,7 @@
       "A_xt_id": 391,
       "pred_B_index": 10,
       "pred_B_xt_id": 391,
-      "similarity": 0.8302149772644043,
+      "similarity": 0.9589964151382446,
       "is_null": false
     },
     {
@@ -218,7 +218,7 @@
       "A_xt_id": 392,
       "pred_B_index": 11,
       "pred_B_xt_id": 392,
-      "similarity": 0.8425255417823792,
+      "similarity": 0.9215800762176514,
       "is_null": false
     },
     {
@@ -226,7 +226,7 @@
       "A_xt_id": 393,
       "pred_B_index": 12,
       "pred_B_xt_id": 393,
-      "similarity": 0.9304537773132324,
+      "similarity": 0.7995393872261047,
       "is_null": false
     },
     {
@@ -234,7 +234,7 @@
       "A_xt_id": 394,
       "pred_B_index": 13,
       "pred_B_xt_id": 394,
-      "similarity": 0.9325539469718933,
+      "similarity": 0.9362618327140808,
       "is_null": false
     },
     {
@@ -242,23 +242,23 @@
       "A_xt_id": 395,
       "pred_B_index": 14,
       "pred_B_xt_id": 395,
-      "similarity": 0.8969270586967468,
+      "similarity": 0.9000975489616394,
       "is_null": false
     },
     {
       "A_index": 18,
       "A_xt_id": 396,
-      "pred_B_index": null,
-      "pred_B_xt_id": null,
-      "similarity": 0.6699553728103638,
-      "is_null": true
+      "pred_B_index": 15,
+      "pred_B_xt_id": 396,
+      "similarity": 0.8650426268577576,
+      "is_null": false
     },
     {
       "A_index": 19,
       "A_xt_id": 397,
       "pred_B_index": 16,
       "pred_B_xt_id": 397,
-      "similarity": 0.9698642492294312,
+      "similarity": 0.8933825492858887,
       "is_null": false
     },
     {
@@ -266,7 +266,7 @@
       "A_xt_id": 398,
       "pred_B_index": 17,
       "pred_B_xt_id": 398,
-      "similarity": 0.8389666080474854,
+      "similarity": 0.926327645778656,
       "is_null": false
     },
     {
@@ -274,7 +274,7 @@
       "A_xt_id": 399,
       "pred_B_index": 18,
       "pred_B_xt_id": 399,
-      "similarity": 0.9215929508209229,
+      "similarity": 0.9221633672714233,
       "is_null": false
     },
     {
@@ -282,7 +282,7 @@
       "A_xt_id": 400,
       "pred_B_index": 19,
       "pred_B_xt_id": 400,
-      "similarity": 0.8567382097244263,
+      "similarity": 0.8944923281669617,
       "is_null": false
     },
     {
@@ -290,7 +290,7 @@
       "A_xt_id": 437,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.6830928325653076,
+      "similarity": 0.736966609954834,
       "is_null": true
     },
     {
@@ -298,7 +298,7 @@
       "A_xt_id": 442,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.549006462097168,
+      "similarity": 0.6796719431877136,
       "is_null": true
     },
     {
@@ -306,7 +306,7 @@
       "A_xt_id": 465,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.792651891708374,
+      "similarity": 0.5312695503234863,
       "is_null": true
     },
     {
@@ -314,7 +314,7 @@
       "A_xt_id": 468,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.6151683926582336,
+      "similarity": 0.7154268026351929,
       "is_null": true
     },
     {
@@ -322,7 +322,7 @@
       "A_xt_id": 471,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.645331621170044,
+      "similarity": 0.48263001441955566,
       "is_null": true
     },
     {
@@ -330,7 +330,7 @@
       "A_xt_id": 474,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.805042028427124,
+      "similarity": 0.6424954533576965,
       "is_null": true
     },
     {
@@ -338,7 +338,7 @@
       "A_xt_id": 477,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.48301318287849426,
+      "similarity": 0.5023316144943237,
       "is_null": true
     }
   ]

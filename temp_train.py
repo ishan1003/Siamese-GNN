@@ -19,9 +19,9 @@ from torch_geometric.nn import SAGEConv
 # ====== CONFIG ===========
 # -------------------------
 CONFIG = {
-    "xt_path": r"C:\Users\Z0054udc\Downloads\Siamese GNN\XT_merged_complete.json",
+    "xt_path": r"C:\Users\Z0054udc\Downloads\Siamese GNN\XT_merged_new2.json",
 
-    "use_features": [0,1,2,3,4,17,18,19],  # indices of features to use
+    "use_features": [0,1,2,3,4,18,19,20],  # indices of features to use
 
     "proj_dim": 64,
     "encoder_hidden": 64,
@@ -30,7 +30,7 @@ CONFIG = {
     "lr": 1e-3,
     "weight_decay": 1e-4,
 
-    "epochs": 800,
+    "epochs": 600,
     "grad_accum_steps": 8,
 
     "temperature": 0.1,
@@ -42,7 +42,7 @@ CONFIG = {
     "device": "cpu",
     "seed": 42,
 
-    "save_path": "siamese_infonce_null_classifier.pt",
+    "save_path": "siamese_infonce_null_test.pt",
 }
 
 torch.manual_seed(CONFIG["seed"])
@@ -106,6 +106,7 @@ class SingleFileEmbeddingPairDataset(Dataset):
             if len(out)==0:
                 return torch.empty((2,0), dtype=torch.long)
             return torch.tensor(out, dtype=torch.long).t().contiguous()
+
 
         A_edges = convert_edges(pair.get("A_edges", []), A_ids)
         B_edges = convert_edges(pair.get("B_edges", []), B_ids)

@@ -6,7 +6,7 @@
     "top5_accuracy": 1.0,
     "null_f1": 0.0,
     "unified_accuracy": 1.0,
-    "null_threshold": 0.7355133792480747,
+    "null_threshold": 0.741270332384585,
     "TP": 0,
     "FP": 0,
     "FN": 0,
@@ -28,10 +28,10 @@
     612
   ],
   "max_similarity_per_A": [
-    0.8697701692581177,
-    0.8301956653594971,
-    0.7785777449607849,
-    0.8790956735610962
+    0.9484205842018127,
+    0.951448917388916,
+    0.9107973575592041,
+    0.8587032556533813
   ],
   "predicted_matches": [
     {
@@ -39,7 +39,7 @@
       "A_xt_id": 368,
       "pred_B_index": 0,
       "pred_B_xt_id": 368,
-      "similarity": 0.8697701692581177,
+      "similarity": 0.9484205842018127,
       "is_null": false
     },
     {
@@ -47,7 +47,7 @@
       "A_xt_id": 369,
       "pred_B_index": 1,
       "pred_B_xt_id": 369,
-      "similarity": 0.8301956653594971,
+      "similarity": 0.951448917388916,
       "is_null": false
     },
     {
@@ -55,7 +55,7 @@
       "A_xt_id": 370,
       "pred_B_index": 2,
       "pred_B_xt_id": 370,
-      "similarity": 0.7785777449607849,
+      "similarity": 0.9107973575592041,
       "is_null": false
     },
     {
@@ -63,7 +63,7 @@
       "A_xt_id": 381,
       "pred_B_index": 3,
       "pred_B_xt_id": 381,
-      "similarity": 0.8790956735610962,
+      "similarity": 0.8587032556533813,
       "is_null": false
     }
   ]
