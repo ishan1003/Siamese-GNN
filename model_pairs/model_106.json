@@ -1,16 +1,11 @@
 {
   "model_id": "106",
-  "hungarian_used": true,
-  "metric_details": {
-    "top1_accuracy": 0.0,
-    "top5_accuracy": 0.800000011920929,
-    "null_f1": 0.7826086956516295,
-    "unified_accuracy": 0.6428571428571429,
-    "null_threshold": 0.741270332384585,
-    "TP": 9,
-    "FP": 5,
-    "FN": 0,
-    "total_faces": 14,
+  "hungarian": true,
+  "metrics": {
+    "top1": 1.0,
+    "top5": 1.0,
+    "null_f1": 0.7272727272721776,
+    "unified_accuracy": 0.5714285714285714,
     "structural_edge_consistency": 0.0
   },
   "A_ids": [
@@ -37,21 +32,37 @@
     122,
     123
   ],
+  "p_null": [
+    0.9919730424880981,
+    0.07277523726224899,
+    0.09269142150878906,
+    0.4086182713508606,
+    0.5612326264381409,
+    0.9991722106933594,
+    0.5180100202560425,
+    0.9991130232810974,
+    0.9978806972503662,
+    0.9989334940910339,
+    0.9996381998062134,
+    0.41227683424949646,
+    0.94505375623703,
+    0.8999395370483398
+  ],
   "max_similarity_per_A": [
-    0.66002357006073,
-    0.5813498497009277,
-    0.34605175256729126,
-    0.6097530126571655,
-    0.6832680702209473,
-    0.7023053765296936,
-    0.6628687381744385,
-    0.6793835759162903,
-    0.5677368640899658,
-    0.5878362655639648,
-    0.6423851251602173,
-    0.6169365048408508,
-    0.6907517910003662,
-    0.6284055113792419
+    0.49861574172973633,
+    0.40345174074172974,
+    0.11051079630851746,
+    0.3357934355735779,
+    0.8172805309295654,
+    0.5074037909507751,
+    0.7467998266220093,
+    0.47634968161582947,
+    0.41969314217567444,
+    0.32311558723449707,
+    0.16300661861896515,
+    0.4306700527667999,
+    0.5745184421539307,
+    0.15859349071979523
   ],
   "predicted_matches": [
     {
@@ -59,23 +70,26 @@
       "A_xt_id": 67,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.66002357006073,
+      "similarity": 0.49861574172973633,
+      "classifier_null_prob": 0.9919730424880981,
       "is_null": true
     },
     {
       "A_index": 1,
       "A_xt_id": 68,
-      "pred_B_index": null,
-      "pred_B_xt_id": null,
-      "similarity": 0.5813498497009277,
-      "is_null": true
+      "pred_B_index": 1,
+      "pred_B_xt_id": 119,
+      "similarity": 0.40345174074172974,
+      "classifier_null_prob": 0.07277523726224899,
+      "is_null": false
     },
     {
       "A_index": 2,
       "A_xt_id": 69,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.34605175256729126,
+      "similarity": 0.11051079630851746,
+      "classifier_null_prob": 0.09269142150878906,
       "is_null": true
     },
     {
@@ -83,7 +97,8 @@
       "A_xt_id": 111,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.6097530126571655,
+      "similarity": 0.3357934355735779,
+      "classifier_null_prob": 0.4086182713508606,
       "is_null": true
     },
     {
@@ -91,7 +106,8 @@
       "A_xt_id": 118,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.6832680702209473,
+      "similarity": 0.8172805309295654,
+      "classifier_null_prob": 0.5612326264381409,
       "is_null": true
     },
     {
@@ -99,7 +115,8 @@
       "A_xt_id": 120,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.7023053765296936,
+      "similarity": 0.5074037909507751,
+      "classifier_null_prob": 0.9991722106933594,
       "is_null": true
     },
     {
@@ -107,7 +124,8 @@
       "A_xt_id": 121,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.6628687381744385,
+      "similarity": 0.7467998266220093,
+      "classifier_null_prob": 0.5180100202560425,
       "is_null": true
     },
     {
@@ -115,7 +133,8 @@
       "A_xt_id": 122,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.6793835759162903,
+      "similarity": 0.47634968161582947,
+      "classifier_null_prob": 0.9991130232810974,
       "is_null": true
     },
     {
@@ -123,7 +142,8 @@
       "A_xt_id": 123,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.5677368640899658,
+      "similarity": 0.41969314217567444,
+      "classifier_null_prob": 0.9978806972503662,
       "is_null": true
     },
     {
@@ -131,7 +151,8 @@
       "A_xt_id": 136,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.5878362655639648,
+      "similarity": 0.32311558723449707,
+      "classifier_null_prob": 0.9989334940910339,
       "is_null": true
     },
     {
@@ -139,7 +160,8 @@
       "A_xt_id": 137,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.6423851251602173,
+      "similarity": 0.16300661861896515,
+      "classifier_null_prob": 0.9996381998062134,
       "is_null": true
     },
     {
@@ -147,7 +169,8 @@
       "A_xt_id": 138,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.6169365048408508,
+      "similarity": 0.4306700527667999,
+      "classifier_null_prob": 0.41227683424949646,
       "is_null": true
     },
     {
@@ -155,7 +178,8 @@
       "A_xt_id": 139,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.6907517910003662,
+      "similarity": 0.5745184421539307,
+      "classifier_null_prob": 0.94505375623703,
       "is_null": true
     },
     {
@@ -163,7 +187,8 @@
       "A_xt_id": 161,
       "pred_B_index": null,
       "pred_B_xt_id": null,
-      "similarity": 0.6284055113792419,
+      "similarity": 0.15859349071979523,
+      "classifier_null_prob": 0.8999395370483398,
       "is_null": true
     }
   ]

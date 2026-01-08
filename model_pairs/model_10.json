@@ -1,16 +1,11 @@
 {
   "model_id": "10",
-  "hungarian_used": true,
-  "metric_details": {
-    "top1_accuracy": 1.0,
-    "top5_accuracy": 1.0,
+  "hungarian": true,
+  "metrics": {
+    "top1": 1.0,
+    "top5": 1.0,
     "null_f1": 0.0,
     "unified_accuracy": 1.0,
-    "null_threshold": 0.741270332384585,
-    "TP": 0,
-    "FP": 0,
-    "FN": 0,
-    "total_faces": 10,
     "structural_edge_consistency": 0.4
   },
   "A_ids": [
@@ -43,17 +38,29 @@
     3984,
     3985
   ],
+  "p_null": [
+    1.8669244639113458e-07,
+    1.8897031623055227e-05,
+    4.733110017696163e-06,
+    2.2018819834102032e-07,
+    1.2655822274609818e-06,
+    7.536404154961929e-05,
+    9.204421758113313e-07,
+    1.1072028428316116e-05,
+    3.8426625792453706e-07,
+    2.4625653168186545e-05
+  ],
   "max_similarity_per_A": [
-    0.8523044586181641,
-    0.8983703851699829,
-    0.8985233306884766,
-    0.9948363304138184,
-    0.8897721767425537,
-    0.7977997064590454,
-    0.8499325513839722,
-    0.8759235143661499,
-    0.9861401319503784,
-    0.9784227609634399
+    0.9567152261734009,
+    0.8547027707099915,
+    0.8644982576370239,
+    0.9970023036003113,
+    0.9686234593391418,
+    0.8518256545066833,
+    0.9060009717941284,
+    0.9709072113037109,
+    0.9839352965354919,
+    0.9884855151176453
   ],
   "predicted_matches": [
     {
@@ -61,7 +68,8 @@
       "A_xt_id": 2484,
       "pred_B_index": 0,
       "pred_B_xt_id": 2484,
-      "similarity": 0.8523044586181641,
+      "similarity": 0.9567152261734009,
+      "classifier_null_prob": 1.8669244639113458e-07,
       "is_null": false
     },
     {
@@ -69,7 +77,8 @@
       "A_xt_id": 2503,
       "pred_B_index": 2,
       "pred_B_xt_id": 2503,
-      "similarity": 0.8983703851699829,
+      "similarity": 0.8547027707099915,
+      "classifier_null_prob": 1.8897031623055227e-05,
       "is_null": false
     },
     {
@@ -77,7 +86,8 @@
       "A_xt_id": 2539,
       "pred_B_index": 4,
       "pred_B_xt_id": 2539,
-      "similarity": 0.8985233306884766,
+      "similarity": 0.8644982576370239,
+      "classifier_null_prob": 4.733110017696163e-06,
       "is_null": false
     },
     {
@@ -85,7 +95,8 @@
       "A_xt_id": 2547,
       "pred_B_index": 5,
       "pred_B_xt_id": 2547,
-      "similarity": 0.9948363304138184,
+      "similarity": 0.9970023036003113,
+      "classifier_null_prob": 2.2018819834102032e-07,
       "is_null": false
     },
     {
@@ -93,7 +104,8 @@
       "A_xt_id": 3370,
       "pred_B_index": 6,
       "pred_B_xt_id": 3370,
-      "similarity": 0.8897721767425537,
+      "similarity": 0.9686234593391418,
+      "classifier_null_prob": 1.2655822274609818e-06,
       "is_null": false
     },
     {
@@ -101,7 +113,8 @@
       "A_xt_id": 3371,
       "pred_B_index": 7,
       "pred_B_xt_id": 3371,
-      "similarity": 0.7977997064590454,
+      "similarity": 0.8518256545066833,
+      "classifier_null_prob": 7.536404154961929e-05,
       "is_null": false
     },
     {
@@ -109,7 +122,8 @@
       "A_xt_id": 3540,
       "pred_B_index": 10,
       "pred_B_xt_id": 3540,
-      "similarity": 0.8499325513839722,
+      "similarity": 0.9060009717941284,
+      "classifier_null_prob": 9.204421758113313e-07,
       "is_null": false
     },
     {
@@ -117,7 +131,8 @@
       "A_xt_id": 3541,
       "pred_B_index": 11,
       "pred_B_xt_id": 3541,
-      "similarity": 0.8759235143661499,
+      "similarity": 0.9709072113037109,
+      "classifier_null_prob": 1.1072028428316116e-05,
       "is_null": false
     },
     {
@@ -125,7 +140,8 @@
       "A_xt_id": 3984,
       "pred_B_index": 14,
       "pred_B_xt_id": 3984,
-      "similarity": 0.9861401319503784,
+      "similarity": 0.9839352965354919,
+      "classifier_null_prob": 3.8426625792453706e-07,
       "is_null": false
     },
     {
@@ -133,7 +149,8 @@
       "A_xt_id": 3985,
       "pred_B_index": 15,
       "pred_B_xt_id": 3985,
-      "similarity": 0.9784227609634399,
+      "similarity": 0.9884855151176453,
+      "classifier_null_prob": 2.4625653168186545e-05,
       "is_null": false
     }
   ]

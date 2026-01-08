@@ -1,24 +1,15 @@
 import os
 import json
 
-def extract_model_num(emb_json):
-    """
-    Extracts the numeric model number prefix from the filenames in the 'files' dict.
-    Example: '106_block_A.x_b' → returns '106'
-    """
-    for k in ['A', 'B']:
-        filename = emb_json.get('files', {}).get(k)
-        if filename:
-            base = os.path.basename(filename)
-            digits = ''
-            for ch in base:
-                if ch.isdigit():
-                    digits += ch
-                else:
-                    break
-            if digits:
-                return digits
-    return None
+def extract_model_num(path):
+        base = os.path.basename(path)
+        digits = ''
+        for ch in base:
+            if ch.isdigit():
+                digits += ch
+            else:
+                break
+        return digits
 
 
 def merge_embeddings_to_xt(xt_path, embedding_folder, out_path):
@@ -49,7 +40,7 @@ def merge_embeddings_to_xt(xt_path, embedding_folder, out_path):
             print(f"❌ Skipping {emb_file} due to JSON error:\n{e}\n")
             continue
 
-        model_num = extract_model_num(emb_json)
+        model_num = extract_model_num(path=emb_file)
         if not model_num:
             print(f"⚠️ Could not extract model number from '{emb_file}', skipping!\n")
             continue
@@ -94,8 +85,8 @@ def merge_embeddings_to_xt(xt_path, embedding_folder, out_path):
 
 
 if __name__ == "__main__":
-    xt_path = "XT_complete_face_mappings.json"  # Ground truth mappings file
-    embedding_folder = "C:\\Users\\Z0054udc\\Downloads\\jsons_complete"  # Folder with embedding JSONs
-    out_path = "XT_merged_complete.json"  # Output file
+    xt_path = "XT_Synthetic_face_mappings.json"  # Ground truth mappings file
+    embedding_folder = "C:\\Users\\Z0054udc\\Downloads\\jsons_synthetic"  # Folder with embedding JSONs
+    out_path = "XT_merged_Synthetic.json"  # Output file
 
     merge_embeddings_to_xt(xt_path, embedding_folder, out_path)
