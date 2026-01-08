@@ -185,11 +185,21 @@ def compute_pred_map(zA, zB, logitsA, use_hungarian, null_thr):
         raw_map = {a: int(sims[a].argmax()) for a in range(N)} if sims is not None else {}
 
     pred_map = {}
+    HIGH_SIM = 0.94
+    STRONG_NULL = 0.92
+
     for a in range(N):
+        max_sim = sims[a].max().item() if sims is not None else -1
+
         if p_null[a] > null_thr:
-            pred_map[a] = -1
+            # allow override only if similarity is very high
+            if max_sim > HIGH_SIM and p_null[a] < STRONG_NULL:
+                pred_map[a] = raw_map.get(a, -1)
+            else:
+                pred_map[a] = -1
         else:
             pred_map[a] = raw_map.get(a, -1)
+
 
     return pred_map, sims, p_null
 
@@ -226,6 +236,63 @@ def compute_top1_top5(sims, matches):
     top5 = torch.any(top5_candidates == valid_B.unsqueeze(1), dim=1).float().mean().item()
 
     return top1, top5
+
+def compute_modified_null_accuracy(zA, zB, matches, pred_map, sim_eps=0.9999):
+    """
+    Symmetric MN accuracy:
+    - counts MODIFIED faces
+    - counts DELETED faces (A->NULL)
+    - counts CREATED faces (no A claims this B)
+    - excludes UNMODIFIED faces
+    """
+
+    correct = 0
+    total = 0
+
+    predicted_B = set(pred_map.values())
+    predicted_B.discard(-1)
+
+    for a, b in matches.tolist():
+
+        # ==================================================
+        # UNMODIFIED FACE → exclude
+        # ==================================================
+        if a != -1 and b != -1:
+            sim = (zA[a] * zB[b]).sum().item()
+            if sim > sim_eps:
+                continue
+
+        # ==================================================
+        # CREATED FACE
+        # ==================================================
+        if a == -1 and b != -1:
+            total += 1
+            correct += int(b not in predicted_B)
+            continue
+
+        # ==================================================
+        # From here: A exists
+        # ==================================================
+        if a == -1:
+            continue
+
+        # ==================================================
+        # DELETED FACE
+        # ==================================================
+        if b == -1:
+            total += 1
+            correct += int(pred_map.get(a, -1) == -1)
+
+        # ==================================================
+        # MODIFIED FACE
+        # ==================================================
+        else:
+            total += 1
+            correct += int(pred_map.get(a, -1) == b)
+
+    return (correct / total) if total > 0 else 0.0
+
+
 
 
 # ---------------------------------------------------
@@ -279,7 +346,8 @@ def test_model(ckpt_path, test_json, use_hungarian=False):
 
     print("\nLoading checkpoint...")
     state, cfg, feat_mean, feat_std = load_checkpoint(ckpt_path)
-    NULL_THR = cfg.get("null_prob_threshold", 0.5)
+    NULL_THR = cfg.get("null_prob_threshold", 0.78
+    )
     print(f"Using NULL classifier threshold = {NULL_THR:.3f}")
 
 
@@ -304,6 +372,8 @@ def test_model(ckpt_path, test_json, use_hungarian=False):
     all_top1, all_top5 = [], []
     all_f1, all_unified = [], []
     all_struct = []
+    all_mn_acc = []
+
 
     print("\n--------------------------------------------")
     print("PER-MODEL ACCURACY SUMMARY")
@@ -341,6 +411,9 @@ def test_model(ckpt_path, test_json, use_hungarian=False):
                 zA, zB, logitsA, use_hungarian, NULL_THR
             )
 
+            mn_acc = compute_modified_null_accuracy(
+                zA, zB, m, pred_map
+            )
 
             max_s = sims.max(dim=1).values
 
@@ -356,26 +429,59 @@ def test_model(ckpt_path, test_json, use_hungarian=False):
             correct = 0
             total = 0
 
+            # which B faces were claimed by any A
+            predicted_B = set(pred_map.values())
+            predicted_B.discard(-1)
+
             for a, b in m.tolist():
+
+                # ==================================================
+                # CREATED FACE (NULL on A side, exists only in B)
+                # ==================================================
+                if a == -1 and b != -1:
+                    is_null_pred = (b not in predicted_B)
+
+                    TP += int(is_null_pred)
+                    FN += int(not is_null_pred)
+
+                    correct += int(is_null_pred)
+                    total += 1
+                    continue
+
+                # ==================================================
+                # From here: A exists
+                # ==================================================
                 if a == -1:
                     continue
 
-                pred_null = (pred_map[a] == -1)
+                is_null_pred = (pred_map[a] == -1)
 
+                # ==================================================
+                # DELETED FACE (NULL on B side)
+                # ==================================================
                 if b == -1:
-                    TP += int(pred_null)
-                    FN += int(not pred_null)
-                    correct += int(pred_null)
+                    TP += int(is_null_pred)
+                    FN += int(not is_null_pred)
+
+                    correct += int(is_null_pred)
+
+                # ==================================================
+                # MODIFIED / UNMODIFIED FACE (NOT NULL)
+                # ==================================================
                 else:
-                    FP += int(pred_null)
-                    correct += int(not pred_null and pred_map[a] == b)
+                    FP += int(is_null_pred)
+                    correct += int(not is_null_pred and pred_map[a] == b)
 
                 total += 1
 
+            # ---------------- NULL F1 (now symmetric) ----------------
             prec = TP / (TP + FP + 1e-12)
-            rec = TP / (TP + FN + 1e-12)
+            rec  = TP / (TP + FN + 1e-12)
             f1 = 2 * prec * rec / (prec + rec + 1e-12)
+
+            # ---------------- Unified Accuracy ----------------
             unified = correct / total if total > 0 else 0.0
+
 
             # ---------------------------------------------------
             # Structural Edge Consistency (Option A)
@@ -389,6 +495,7 @@ def test_model(ckpt_path, test_json, use_hungarian=False):
             all_f1.append(f1)
             all_unified.append(unified)
             all_struct.append(struct_cons)
+            all_mn_acc.append(mn_acc)
 
             # ---------------------------------------------------
             # Per-model console print
@@ -400,6 +507,7 @@ def test_model(ckpt_path, test_json, use_hungarian=False):
                 f"NULL-F1={100*f1:.1f}%  "
                 f"Unified={100*unified:.1f}%  "
                 f"Struct={100*struct_cons:.1f}%"
+                f"MN-Acc={100*mn_acc:.1f}%"
             )
 
             # ---------------------------------------------------
@@ -415,6 +523,8 @@ def test_model(ckpt_path, test_json, use_hungarian=False):
                     "null_f1": float(f1),
                     "unified_accuracy": float(unified),
                     "structural_edge_consistency": float(struct_cons),
+                    "modified_null_accuracy": float(mn_acc),
+
                 },
 
                 "A_ids": [int(x) for x in A.xt],
@@ -451,7 +561,8 @@ def test_model(ckpt_path, test_json, use_hungarian=False):
     print(f"Top-5 Accuracy:          {100*np.mean(all_top5):.2f}%")
     print(f"NULL F1 Score:           {100*np.mean(all_f1):.2f}%")
     print(f"Unified Accuracy:        {100*np.mean(all_unified):.2f}%")
-    print(f"Struct Consistency:      {100*np.mean(all_struct):.2f}%")
+    print(f"Struct Consistency:      {100*np.mean(all_struct):.2f}% ")
+    print(f"Modified+NULL Accuracy:  {100*np.mean(all_mn_acc):.2f}%")
     print("===================================\n")
 
 

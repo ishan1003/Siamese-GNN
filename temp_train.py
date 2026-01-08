@@ -19,7 +19,7 @@ from torch_geometric.nn import SAGEConv
 # ====== CONFIG ===========
 # -------------------------
 CONFIG = {
-    "xt_path": r"C:\Users\Z0054udc\Downloads\Siamese GNN\XT_merged_Synthetic.json",
+    "xt_path": r"C:\Users\Z0054udc\Downloads\Siamese GNN\XT_merged_Synthetic_cleaned.json",
 
     "use_features": [0,1,2,3,4,5,6,20,21,22],  # indices of features to use
 
@@ -30,13 +30,13 @@ CONFIG = {
     "lr": 1e-3,
     "weight_decay": 1e-4,
 
-    "epochs": 90,
+    "epochs": 130,
     "grad_accum_steps": 8,
 
     "temperature": 0.1,
     "null_margin": 0.2,
-    "null_weight": 1.0,
-    "struct_weight": 20,   # or 1.0 to make it stronger
+    "null_weight": 1.2,
+    "struct_weight": 20,   # Increase it to make it stronger
 
 
     "device": "cpu",
@@ -235,6 +235,34 @@ def info_nce(z1, z2, matches_pos, tau=0.1):
     targets = matches_pos[:,1].long()
     return F.cross_entropy(sims[anchors], targets)
 
+
+# ---------------------------------------------------
+#      INFO-NCE (masked identical pairs)
+# ---------------------------------------------------
+def info_nce_weighted(z1, z2, matches_pos, tau=0.1, sim_eps=0.995):
+    if matches_pos.numel() == 0:
+        return z1.sum() * 0.0
+
+    anchors = matches_pos[:, 0].long()
+    targets = matches_pos[:, 1].long()
+
+    pos_sim = (z1[anchors] * z2[targets]).sum(dim=1)
+
+    # weights: anchors vs learners
+    weights = torch.ones_like(pos_sim)
+    weights[pos_sim > sim_eps] = 0.1   # unmodified → anchor
+
+    sims = (z1 @ z2.t()) / tau
+    loss = F.cross_entropy(
+        sims[anchors],
+        targets,
+        reduction="none"
+    )
+
+    return (loss * weights).sum() / weights.sum()
+
+
+
 # ---------------------------------------------------
 #   Structural Consistency Loss
 # ---------------------------------------------------
@@ -319,22 +347,21 @@ def find_best_null_threshold(probs, gt):
 # ---------------------------------------------------
 #                  PREDICT FUNCTION
 # ---------------------------------------------------
-def predict(z1, z2, thr):
-    """
-    Predict for each A face the best B face based on similarity threshold.
-    If max similarity < thr → predict NULL.
-    """
+def predict(z1, z2, thr, margin=0.05):
     if z2.shape[0] == 0:
-        # if model-B has 0 faces
-        return torch.full((z1.shape[0],), -1, dtype=torch.long), None
+        return torch.full((z1.shape[0],), -1), None
 
-    sims = z1 @ z2.t()            # [N1, N2] cosine similarities
-    max_s, idx = sims.max(dim=1)  # best similarity & index for each A
+    sims = z1 @ z2.t()
+    max_s, idx = sims.max(dim=1)
 
-    # If similarity is below threshold → NULL
-    pred = torch.where(max_s > thr, idx, torch.full_like(idx, -1))
+    pred = torch.where(
+        max_s > (thr + margin),
+        idx,
+        torch.full_like(idx, -1)
+    )
 
     return pred, max_s
+
 
 
 # ---------------------------------------------------
@@ -426,11 +453,40 @@ def train():
             # ---------- NULL probability ----------
             p_null_A = torch.sigmoid(logA)
 
+            
+
             # ---------- InfoNCE ----------
             pos = m[(m[:,0]!=-1)&(m[:,1]!=-1)]
-            l1 = info_nce(zA, zB, pos, CONFIG["temperature"])
-            l2 = info_nce(zB, zA, pos[:, [1,0]], CONFIG["temperature"]) if pos.numel()>0 else 0
-            info_loss = 0.5*(l1+l2)
+            l1 = info_nce_weighted(zA, zB, pos, CONFIG["temperature"])
+            l2 = info_nce_weighted(zB, zA, pos[:, [1,0]], CONFIG["temperature"])
+            info_loss = 0.5 * (l1 + l2)
+
+            # --- detect unmodified faces ---
+            identical_A = torch.zeros(hA.size(0), device=device)
+
+            for a, b in pos.tolist():
+                sim = (zA[a] * zB[b]).sum()
+                if sim > 0.995:
+                    identical_A[a] = 1
+
+            identical_set = set(torch.where(identical_A == 1)[0].tolist())
+
+
+            identical_B = torch.zeros(hB.size(0), device=device)
+
+            if zA.shape[0] > 0:
+                sims_BA = zB @ zA.t()  # [NB, NA]
+
+                top2 = sims_BA.topk(k=min(2, sims_BA.size(1)), dim=1).values
+                max_sim = top2[:, 0]
+                second_sim = top2[:, 1] if top2.size(1) > 1 else torch.zeros_like(max_sim)
+
+                identical_B = (
+                    (max_sim > 0.98) &
+                    ((max_sim - second_sim) > 0.1)
+                ).float()
+
+
 
             # ---------- NULL classification ----------
             labels_A = torch.zeros(hA.size(0), device=device)
@@ -439,42 +495,94 @@ def train():
                 if a!=-1 and b==-1: labels_A[a]=1
                 if a==-1 and b!=-1: labels_B[b]=1
 
-            null_loss = bce(logA, labels_A) + bce(logB, labels_B)
+            null_weights_A = torch.ones_like(labels_A)
+            null_weights_A[identical_A == 1] = 0.05  # anchors
+
+            null_loss_A = (
+                F.binary_cross_entropy_with_logits(
+                    logA, labels_A, reduction="none"
+                ) * null_weights_A
+            ).mean()
+
+            null_weights_B = torch.ones_like(labels_B)
+            null_weights_B[identical_B == 1] = 0.05   # anchors
+
+            null_loss_B = (
+                F.binary_cross_entropy_with_logits(
+                    logB, labels_B, reduction="none"
+                ) * null_weights_B
+            ).mean()
+
+
+            null_loss = null_loss_A + null_loss_B
 
             # ---------- STRUCTURAL LOSS (classifier-aware) ----------
             pred_map = {}
             sims = zA @ zB.t() if zB.shape[0] > 0 else None
+            conf_map = {}  # confidence weight for structure
 
-            for a,_ in m.tolist():
+            for a, _ in m.tolist():
                 if a == -1:
                     continue
-                if p_null_A[a] > NULL_PROB_TRAIN:
+
+                null_prob = p_null_A[a].item()
+
+                # ---- SAFETY: no B nodes exist ----
+                if sims is None:
                     pred_map[a] = -1
-                else:
-                    pred_map[a] = int(sims[a].argmax()) if sims is not None else -1
+                    continue
+
+                if null_prob > NULL_PROB_TRAIN:
+                    pred_map[a] = -1
+                    continue
+
+                sim_row = sims[a]
+
+                top2 = sim_row.topk(min(2, sim_row.numel())).values
+                gap = top2[0] - (top2[1] if top2.numel() > 1 else 0.0)
+
+                if gap < 0.05:
+                    pred_map[a] = -1
+                    continue
+
+                pred_map[a] = int(sim_row.argmax())
+                conf_map[a] = (1.0 - null_prob) * gap
+           
 
             edgeA = A.edge_index.t().tolist()
             edgeB_set = set(tuple(x) for x in B.edge_index.t().tolist())
 
             struct_pairs=[]
             for ai,aj in edgeA:
+                if ai in identical_set or aj in identical_set:
+                    continue
                 bi = pred_map.get(ai,-1)
                 bj = pred_map.get(aj,-1)
                 if bi!=-1 and bj!=-1 and (bi,bj) in edgeB_set:
-                    struct_pairs.append((aj,bj))
+                    w = conf_map.get(ai, 0.0) * conf_map.get(aj, 0.0)
+                    if w > 0:
+                        struct_pairs.append((aj, bj, w))
+
 
             if struct_pairs:
                 idxA = torch.tensor([p[0] for p in struct_pairs], device=device)
                 idxB = torch.tensor([p[1] for p in struct_pairs], device=device)
-                struct_loss = 1 - F.cosine_similarity(hA[idxA], hB[idxB]).mean()
+                weights = torch.tensor([p[2] for p in struct_pairs], device=device)
+
+                sims_struct = F.cosine_similarity(hA[idxA], hB[idxB])
+                struct_loss = 1 - (weights * sims_struct).sum() / (weights.sum() + 1e-6)
+
             else:
                 struct_loss = torch.tensor(0., device=device)
+
+            struct_w = CONFIG["struct_weight"] if ep >= 10 else 0.0
 
             total = (
                 info_loss +
                 CONFIG["null_weight"] * null_loss +
-                CONFIG["struct_weight"] * struct_loss
+                struct_w * struct_loss
             ) / grad_acc
+
 
             total.backward()
             total_loss += total.item()*grad_acc
@@ -500,9 +608,6 @@ def train():
 
         print(f"  🔧 Calibrated NULL threshold: {NULL_PROB_TRAIN:.3f} (F1={null_f1:.3f})")
 
-        best_thr, best_f1 = find_best_null_threshold(all_null_probs, all_null_gt)
-        print(f"Best NULL threshold = {best_thr:.3f}, F1 = {best_f1:.3f}")
-
 
         # ---------- validation ----------
         model.eval()
@@ -523,7 +628,25 @@ def train():
                     E1.append(100*t1)
                     E5.append(100*t5)
 
-                preds,_ = predict(zA,zB,thr)
+                logitsA = model.null_head(
+                    torch.cat([
+                        model.encoder(A.x, A.edge_index),
+                        zA,
+                        torch.zeros(zA.size(0), 1, device=device)  # sim_gap not needed here
+                    ], dim=1)
+                ).squeeze(1)
+
+                p_null = torch.sigmoid(logitsA)
+
+                preds = torch.full((zA.size(0),), -1, device=device)
+
+                if zB.shape[0] > 0:
+                    sims = zA @ zB.t()
+                    best_match = sims.argmax(dim=1)
+                    for a in range(zA.size(0)):
+                        if p_null[a] <= NULL_PROB_TRAIN:
+                            preds[a] = best_match[a]
+
                 TP=FP=FN=0
                 for a,b in m.tolist():
                     if a==-1: continue
@@ -538,8 +661,13 @@ def train():
                 rec  = TP/(TP+FN+1e-12)
                 EN.append(100*(2*prec*rec/(prec+rec+1e-12)))
 
-        avg1,avg5,avgN = np.mean(E1), np.mean(E5), np.mean(EN)
+        avg1, avg5, avgN = np.mean(E1), np.mean(E5), np.mean(EN)
         ep_loss = total_loss/len(ds)
+
+        loss_hist.append(ep_loss)
+        top1_hist.append(avg1)
+        top5_hist.append(avg5)
+        null_hist.append(avgN)
 
         print(
             f"Epoch {ep+1:03d} "
@@ -549,6 +677,7 @@ def train():
             f"NullF1={avgN:.2f}%"
         )
 
+
         if avg1 > best:
             best = avg1
             torch.save({
@@ -557,7 +686,7 @@ def train():
                 "config": CONFIG,
                 "feat_mean": ds.feat_mean.cpu().tolist(),
                 "feat_std": ds.feat_std.cpu().tolist(),
-                "null_prob_threshold": float(best_thr)
+                "null_prob_threshold": float(NULL_PROB_TRAIN)
             }, CONFIG["save_path"])
 
     print("\nTraining Completed — Best Top1:", best)
