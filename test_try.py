@@ -185,8 +185,8 @@ def compute_pred_map(zA, zB, logitsA, use_hungarian, null_thr):
         raw_map = {a: int(sims[a].argmax()) for a in range(N)} if sims is not None else {}
 
     pred_map = {}
-    HIGH_SIM = 0.94
-    STRONG_NULL = 0.92
+    HIGH_SIM = 0.95
+    STRONG_NULL = 0.91
 
     for a in range(N):
         max_sim = sims[a].max().item() if sims is not None else -1
